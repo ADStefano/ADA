@@ -1,8 +1,8 @@
 # Sumário:
-* [Introdução] [#introdução]
-* [sql] [#sql]
-* [src] [#src]
-* [Rotas da API] [#rotas-da-api]
+* [Introdução](#introdução)
+* [sql](#sql)
+* [src](#src)
+* [Rotas da API](#rotas-da-api)
 
 # Introdução
   * API do backend do projeto, responsável por crias as rotas da API, autenticar o usuário, obter as variáveis de ambiente e fazer as operações de CRUD. Roda na porta 5000
