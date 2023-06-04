@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Usuários</title>
+
+    <link rel="stylesheet" type="text/css" href="/assets/css/login.css">
+    <link rel="icon" type="image/x-icon" href="/assets/images/favicon.ico">
+</head>
+<body>
+    <div class="top-nav">
+        <a href="/login" class="active">A.D.A</a>
+    </div>
+    <div class = "container-login">
+        <div>
+            <form class="ada-form" id="formulario-cadastro" autocomplete="off">
+                <span>Crie a sua conta</span>
+            </br>
+                <div>
+                    <input type="text" name="nome" id="nome" placeholder="Digite o seu nome" required="required">
+                </div>
+                <div>
+                    <input type="text" name="email" id="email" placeholder="Digite o seu email" required="required">
+                </div>
+                <div>
+                    <input type="text" name="nick" id="nick" placeholder="Digite o seu nome de usuário" required="required">
+                </div>
+                <div>
+                    <input type="password" name="senha" id="senha" placeholder="Digite a sua senha" required="required">
+                </div>
+                <div>
+                    <input type="password" name="confirmar-senha" id="confirmar-senha" placeholder="Confirme a sua senha" required="required">
+                </div>
+                <button type="submit" class="btn-ada">Cadastrar</button>
+                </br>
+                <a href="/login"> Clique aqui para fazer o login </a>
+            </form>
+        </div>
+    </div>
+    <script src="/assets/js/jquery.min.js"></script>
+    <script src="/assets/js/cadastro.js"></script>
+</body>
+</html>
