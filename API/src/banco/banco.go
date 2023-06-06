@@ -8,15 +8,15 @@ import (
 )
 
 // Conecta com o banco de dados
-func Conn()(*sql.DB, error){
+func Conn() (*sql.DB, error) {
 
 	db, erro := sql.Open("mysql", config.DB_String)
-	if erro != nil{
+	if erro != nil {
 		fmt.Println("Erro ao conectar com o banco de dados!")
 		return nil, erro
 	}
 
-	if erro := db.Ping(); erro != nil{
+	if erro := db.Ping(); erro != nil {
 		fmt.Println("Erro com a conexão com o banco de dados!")
 		return nil, erro
 	}

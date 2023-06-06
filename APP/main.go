@@ -1,6 +1,8 @@
 package main
 
 import (
+	"app/src/config"
+	"app/src/cookies"
 	"app/src/router"
 	"app/utils"
 	"fmt"
@@ -10,10 +12,11 @@ import (
 
 func main() {
 
-
+	config.Carregar()
+	cookies.Configurar()
 	utils.CarregarTemplates()
 	r := router.Gerar()
 	
-	fmt.Println("Rodando APP na porta 3000")
-	log.Fatal(http.ListenAndServe(":3000", r))
+	fmt.Printf("Rodando APP na porta: %d\n", config.Port)
+	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%d", config.Port), r))
 }
