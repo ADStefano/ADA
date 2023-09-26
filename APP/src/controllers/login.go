@@ -11,6 +11,7 @@ import (
 	"net/http"
 )
 
+// Utiliza o email e senha do usuário para autenticar na aplicação
 func FazerLogin(w http.ResponseWriter, r *http.Request) {
 
 	r.ParseForm()

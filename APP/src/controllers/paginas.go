@@ -6,10 +6,16 @@ import (
 )
 
 // Renderiza a tela de login
-func CarregarLogin(w http.ResponseWriter, r *http.Request){
+func CarregarLogin(w http.ResponseWriter, r *http.Request) {
 	utils.ExecutarTemplate(w, "login.html", nil)
 }
 
-func CarregarCadastroUsuario(w http.ResponseWriter, r *http.Request){
+// Renderiza a tela de cadastro
+func CarregarCadastroUsuario(w http.ResponseWriter, r *http.Request) {
 	utils.ExecutarTemplate(w, "cadastro.html", nil)
+}
+
+// Renderiza a pagina principal com as publicações
+func CarregarPaginaPrincipal(w http.ResponseWriter, r *http.Request) {
+	utils.ExecutarTemplate(w, "home.html", nil)
 }

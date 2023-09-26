@@ -5,10 +5,21 @@ import (
 	"app/src/cookies"
 	"app/src/router"
 	"app/utils"
+//	"encoding/hex"
 	"fmt"
 	"log"
 	"net/http"
+
+//	"github.com/gorilla/securecookie"
 )
+
+// Função para criar uma hash key e um block key aleatório
+// func init(){
+// 	hashKey := hex.EncodeToString(securecookie.GenerateRandomKey(16))
+// 	blockKey := hex.EncodeToString(securecookie.GenerateRandomKey(16))
+// 	fmt.Println(hashKey)
+// 	fmt.Println(blockKey)
+// }
 
 func main() {
 
