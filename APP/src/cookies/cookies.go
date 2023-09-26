@@ -3,6 +3,7 @@ package cookies
 import (
 	"app/src/config"
 	"net/http"
+	"time"
 
 	"github.com/gorilla/securecookie"
 )
@@ -31,6 +32,8 @@ func Salvar(w http.ResponseWriter, ID, token string) error {
 		Value: dadosCodificados,
 		Path: "/",
 		HttpOnly: true,
+		Expires: time.Now().Add(time.Hour * 12),
+		Secure: true,
 	})
 
 	return nil

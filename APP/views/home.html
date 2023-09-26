@@ -9,6 +9,14 @@
 </head>
 <body>
     <h2>Página principal</h2>
+
+    {{ range .}}
+        <h3> {{.Titulo}}</h3>
+        <h4>{{.Conteudo}}</h4>
+        <h5>Autor:{{.AutorNick}}</h5>
+        <h5>Curtidas: {{.Curtidas}}</h5>
+        <hr>
+    {{ end }}
     <marquee>ebaaaaaaaaaaaaaaa</marquee>
 </body>
 </html>
