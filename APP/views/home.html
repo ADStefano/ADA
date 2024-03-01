@@ -5,18 +5,49 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/x-icon" href="/assets/images/favicon.ico">
+    <link rel="stylesheet" href="/assets/css/bootstrap.css">
+    <link rel="stylesheet" href="/assets/fontawesome/css/all.min.css">
     <title>Home</title>
 </head>
-<body>
-    <h2>Página principal</h2>
+<body class="d-flex flex-column min-vh-100">
 
-    {{ range .}}
-        <h3> {{.Titulo}}</h3>
-        <h4>{{.Conteudo}}</h4>
-        <h5>Autor:{{.AutorNick}}</h5>
-        <h5>Curtidas: {{.Curtidas}}</h5>
-        <hr>
-    {{ end }}
-    <marquee>ebaaaaaaaaaaaaaaa</marquee>
+      {{ template "cabecalho" }}
+
+      <div class="container-fluid">
+        <div class="col-md-7 mx-auto my-4" style="padding: 20px; border: 1px solid #ddd;">
+          <h3> Nova Publicação </h3>
+          <fieldset>
+            <form id="nova-publicacao">
+              <div class="form-group">
+                <label for="titulo"> Titulo </label>
+                <input type="text" class="form-control text-dark" id="titulo" name="titulo" required="required" placeholder="Insira o titulo da sua publicação">
+              </div>
+              <br>
+              <div class="form-group">
+                <label for="conteudo"> Conteúdo </label>
+                <textarea class="form-control" id="conteudo" name="conteudo" required="required" placeholder="Insira o conteúdo da sua publicação"></textarea>
+              </div>
+              <br>
+              <button class="btn text-light" style="background-color: #3A015C;" type="submit"> Publicar </button> 
+            </form>
+          </fieldset>
+        </div>
+        <br>
+        <div class="col-md-7 mx-auto my-4">
+          {{ range .Publicacoes }}
+            {{ if (eq .AutorID $.UsuarioID) }}
+              {{ template "publicacao-com-permissao" .}}
+            {{ else }}
+              {{ template "publicacao-sem-permissao" .}}
+            {{ end }}
+          {{ end }}
+        </div>
+      </div>
+
+      {{ template "footer" }}
+      {{ template "scripts" }}
+
+      <script src="/assets/js/publicacoes.js"></script>
+
 </body>
 </html>

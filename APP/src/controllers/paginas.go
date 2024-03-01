@@ -2,6 +2,7 @@ package controllers
 
 import (
 	"app/src/config"
+	"app/src/cookies"
 	"app/src/modelos"
 	"app/src/requisicoes"
 	"app/src/respostas"
@@ -9,6 +10,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
+	"strconv"
 )
 
 // Renderiza a tela de login
@@ -33,7 +35,7 @@ func CarregarPaginaPrincipal(w http.ResponseWriter, r *http.Request) {
 	}
 
 	defer response.Body.Close()
-	
+
 	if response.StatusCode >= 400 {
 		respostas.TratarErroAPI(w, response)
 		return
@@ -43,8 +45,17 @@ func CarregarPaginaPrincipal(w http.ResponseWriter, r *http.Request) {
 
 	if erro := json.NewDecoder(response.Body).Decode(&publicacoes); erro != nil {
 		respostas.JSON(w, http.StatusUnprocessableEntity, respostas.ErroAPI{Erro: erro.Error()})
-		return	
+		return
 	}
 
-	utils.ExecutarTemplate(w, "home.html", publicacoes)
+	cookie, _ := cookies.Ler(r)
+	usuarioID, _ := strconv.ParseUint(cookie["id"], 10, 64)
+
+	utils.ExecutarTemplate(w, "home.html", struct{
+		Publicacoes []modelos.Publicacoes
+		UsuarioID uint64
+	}{
+		Publicacoes: publicacoes,
+		UsuarioID: usuarioID,
+	})
 }

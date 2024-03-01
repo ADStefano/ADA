@@ -28,6 +28,6 @@ func main() {
 	utils.CarregarTemplates()
 	r := router.Gerar()
 	
-	fmt.Printf("Rodando APP na porta: %d\n", config.Port)
+	fmt.Printf("PORTA: %d\nRodando APP...\n", config.Port)
 	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%d", config.Port), r))
 }

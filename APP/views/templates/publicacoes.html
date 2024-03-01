@@ -1,0 +1,45 @@
+{{ define "curtidas" }}
+    <i class="fas fa-thumbs-up curtir-publicacao"></i>
+    <span style="margin-left: 5px; margin-right: 5px;"> {{ .Curtidas }} </i></span>
+{{ end }}
+
+{{ define "editar" }}
+    <span style="margin-left: 5px; margin-right: 5px;">
+        <a href="/editar" class="href" style="text-decoration: none; color: black;"> Editar <i class="fa-regular fa-pen-to-square"></i> </a>
+    </span>
+{{ end }}
+
+{{ define "apagar" }}
+    <span style="margin-left: 5px; margin-right: 5px;">
+        <a href="/apagar" class="href" style="color: red; text-decoration: none;"> Apagar <i class="fa-solid fa-trash text-danger"></i></a>
+    </span>
+{{ end }}
+
+{{ define "cabecalho-publicacao" }}
+    <h6 align="right"> {{ .CriadaEm.Format "02/01/2006" }}</h6>
+    <h1 class="display-6">{{ .Titulo }}</h1>
+    <p class="lead">{{ .Conteudo }}</p>
+    <a href="#"> {{ .AutorNick }} </a>
+    <br>
+    <br>
+{{ end }}
+
+{{ define "publicacao-com-permissao" }}
+    <div class="jumbotron" style="padding: 20px; border: 1px solid #ddd;" data-publicacao-id="{{ .ID }}">
+        {{ template "cabecalho-publicacao" .}}
+        <p style="text-align: right;">
+            {{ template "curtidas" . }}
+            {{ template "editar" }}
+            {{ template "apagar" }}
+        </p>
+    </div>
+{{ end }}
+
+{{ define "publicacao-sem-permissao" }}
+    <div class="jumbotron" style="padding: 20px; border: 1px solid #ddd;" data-publicacao-id="{{ .ID }}">
+        {{ template "cabecalho-publicacao" .}}
+        <p>
+            {{ template "curtidas" . }}
+        </p>
+    </div>
+{{ end }}

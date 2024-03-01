@@ -17,38 +17,39 @@ func Configurar() {
 
 // Registra as informações de autenticação
 func Salvar(w http.ResponseWriter, ID, token string) error {
-	dados := map[string] string{
-		"id": ID,
+	dados := map[string]string{
+		"id":    ID,
 		"token": token,
 	}
 
 	dadosCodificados, erro := s.Encode("dados", dados)
-	if erro != nil{
+	if erro != nil {
 		return erro
 	}
 
 	http.SetCookie(w, &http.Cookie{
-		Name: "dados",
-		Value: dadosCodificados,
-		Path: "/",
+		Name:     "dados",
+		Value:    dadosCodificados,
+		Path:     "/",
 		HttpOnly: true,
-		Expires: time.Now().Add(time.Hour * 12),
-		Secure: true,
+		SameSite: http.SameSiteNoneMode,
+		Expires:  time.Now().Add(time.Hour * 12),
+		Secure:   true,
 	})
 
 	return nil
 }
 
 // Resgata as informações do cookie
-func Ler(r* http.Request)(map[string]string, error){
+func Ler(r *http.Request) (map[string]string, error) {
 	cookie, erro := r.Cookie("dados")
-	if erro != nil{
+	if erro != nil {
 		return nil, erro
 	}
 
-	valores := make(map[string]string) 
+	valores := make(map[string]string)
 
-	if erro := s.Decode("dados", cookie.Value, &valores); erro != nil{
+	if erro := s.Decode("dados", cookie.Value, &valores); erro != nil {
 		return nil, erro
 	}
 

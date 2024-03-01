@@ -6,6 +6,7 @@ function fazerLogin(evento) {
     $.ajax({
         url: "/login",
         method: "POST",
+        dataType: "text",
         data: {
             email: $('#email').val(),
             senha: $('#senha').val(),
@@ -15,4 +16,4 @@ function fazerLogin(evento) {
     }).fail(function() {
         alert("Ops...", "Usuário ou senha incorretos!", "error");
     });
-}
+};
