@@ -1,9 +1,11 @@
 package controllers
 
 import (
+	"app/src/config"
 	"app/src/respostas"
 	"bytes"
 	"encoding/json"
+	"fmt"
 	"net/http"
 )
 
@@ -23,7 +25,8 @@ func CadastrarUsuario(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	response, erro := http.Post("http://localhost:5000/usuarios", "application/json", bytes.NewBuffer(usuario))
+	url := fmt.Sprintf("%s/usuarios", config.API_URL)
+	response, erro := http.Post(url, "application/json", bytes.NewBuffer(usuario))
 
 	if erro != nil {
 		respostas.JSON(w, http.StatusInternalServerError, respostas.ErroAPI{Erro: erro.Error()})

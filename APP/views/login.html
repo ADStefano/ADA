@@ -16,9 +16,9 @@
     </div>
     <div class = "container-login">
         <div>
-            <form class="ada-form" id="login" autocomplete="off">
+            <form class="ada-form" id="login">
                 <span>Seja bem vindo ao A.D.A</span>
-            </br>
+                </br>
                 <div>
                     <input type="text" name="email" id="email" placeholder="Digite o seu email" required="required">
                 </div>
@@ -31,7 +31,7 @@
             </form>
         </div>
     </div>
-    <script src="/assets/js/jquery.min.js"></script>
+    {{ template "scripts" }}
     <script src="/assets/js/login.js"></script>
 </body>
 </html>

@@ -1,20 +1,19 @@
-$("#login").on("submit", fazerLogin)
+$('#login').on('submit', fazerLogin);
 
-function fazerLogin(evento){
+function fazerLogin(evento) {
     evento.preventDefault();
 
     $.ajax({
         url: "/login",
         method: "POST",
+        dataType: "text",
         data: {
-            email: $("#email").val(),
-            senha: $("#senha").val(),
+            email: $('#email').val(),
+            senha: $('#senha').val(),
         }
     }).done(function() {
         window.location = ("/home");
-        console.log("done");
     }).fail(function() {
-        alert("Erro ao fazer login :c");
-        console.log("fail");
+        alert("Ops...", "Usuário ou senha incorretos!", "error");
     });
-}
+};

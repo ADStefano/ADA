@@ -1,0 +1,20 @@
+{{ define "cabecalho" }}
+<nav class="navbar navbar-expand-lg " style="background-color: #3A015C;">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/home" style="color: white">A.D.A</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-principal" aria-controls="navbar-principal" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbar-principal">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="/perfil" style="color: white">Perfil</a>
+          </li>
+        </ul>
+        <form class="d-flex" action="/buscar-usuarios" method="get">
+          <input class="form-control mr-sm-2" type="search" placeholder="Buscar Usuário" id="usuario" name="usuario" required="required" style="background-color: white; opacity: 1;">
+        </form>
+      </div>
+    </div>
+  </nav>
+{{ end }}
