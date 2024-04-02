@@ -1,17 +1,17 @@
 {{ define "curtidas" }}
-    <i class="fas fa-thumbs-up curtir-publicacao"></i>
+    <i class="fas fa-thumbs-up curtir-publicacao" style="cursor: pointer"></i>
     <span style="margin-left: 5px; margin-right: 5px;"> {{ .Curtidas }} </i></span>
 {{ end }}
 
 {{ define "editar" }}
     <span style="margin-left: 5px; margin-right: 5px;">
-        <a href="/editar" class="href" style="text-decoration: none; color: black;"> Editar <i class="fa-regular fa-pen-to-square"></i> </a>
+        <a href="/publicacoes/{{ .ID }}/editar" style="text-decoration: none; color: black;"><i class="fa-regular fa-pen-to-square"></i> </a>
     </span>
 {{ end }}
 
 {{ define "apagar" }}
     <span style="margin-left: 5px; margin-right: 5px;">
-        <a href="/apagar" class="href" style="color: red; text-decoration: none;"> Apagar <i class="fa-solid fa-trash text-danger"></i></a>
+        <i class="fa-solid fa-trash deletar-publicacao" style="color: red; text-decoration: none; cursor: pointer"></i>
     </span>
 {{ end }}
 
@@ -29,8 +29,8 @@
         {{ template "cabecalho-publicacao" .}}
         <p style="text-align: right;">
             {{ template "curtidas" . }}
-            {{ template "editar" }}
-            {{ template "apagar" }}
+            {{ template "editar" . }}
+            {{ template "apagar" . }}
         </p>
     </div>
 {{ end }}

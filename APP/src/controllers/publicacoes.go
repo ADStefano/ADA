@@ -74,3 +74,101 @@ func CurtirPublicacao(w http.ResponseWriter, r *http.Request) {
 
 	respostas.JSON(w, response.StatusCode, nil)
 }
+
+// Chama a API para remover a curtida de uma publicação
+func DescurtirPublicacao(w http.ResponseWriter, r *http.Request) {
+
+	parametros := mux.Vars(r)
+
+	publicacaoID, erro := strconv.ParseUint(parametros["publicacaoID"], 10, 64)
+	if erro != nil {
+		respostas.JSON(w, http.StatusBadRequest, respostas.ErroAPI{Erro: erro.Error()})
+		return
+	}
+
+	url := fmt.Sprintf("%s/publicacoes/%d/descurtir", config.API_URL, publicacaoID)
+	response, erro := requisicoes.RequisicaoComAutenticacao(r, http.MethodPost, url, nil)
+
+	if erro != nil {
+		respostas.JSON(w, http.StatusInternalServerError, respostas.ErroAPI{Erro: erro.Error()})
+		return
+	}
+
+	defer response.Body.Close()
+
+	if response.StatusCode >= 400 {
+		respostas.TratarErroAPI(w, response)
+		return
+	}
+
+	respostas.JSON(w, response.StatusCode, nil)
+}
+
+// Chama a API para editar uma publicação
+func EditarPublicacao(w http.ResponseWriter, r *http.Request){
+
+	parametros := mux.Vars(r)
+
+	publicacaoID, erro := strconv.ParseUint(parametros["publicacaoID"], 10, 64)
+	if erro != nil {
+		respostas.JSON(w, http.StatusBadRequest, respostas.ErroAPI{Erro: erro.Error()})
+		return
+	}
+
+	r.ParseForm()
+
+	publicacao, erro := json.Marshal(map[string]string{
+		"titulo":   r.FormValue("titulo"),
+		"conteudo": r.FormValue("conteudo"),
+	})
+
+	if erro != nil {
+		respostas.JSON(w, http.StatusBadRequest, respostas.ErroAPI{Erro: erro.Error()})
+		return
+	}
+
+	url := fmt.Sprintf("%s/publicacoes/%d", config.API_URL, publicacaoID)
+	response, erro := requisicoes.RequisicaoComAutenticacao(r, http.MethodPut, url, bytes.NewBuffer(publicacao))
+
+	if erro != nil {
+		respostas.JSON(w, http.StatusInternalServerError, respostas.ErroAPI{Erro: erro.Error()})
+		return
+	}
+
+	defer response.Body.Close()
+
+	if response.StatusCode >= 400 {
+		respostas.TratarErroAPI(w, response)
+		return
+	}
+
+	respostas.JSON(w, response.StatusCode, nil)
+}
+
+func DeletarPublicacao(w http.ResponseWriter, r *http.Request){
+
+	parametros := mux.Vars(r)
+
+	publicacaoID, erro := strconv.ParseUint(parametros["publicacaoID"], 10, 64)
+	if erro != nil {
+		respostas.JSON(w, http.StatusBadRequest, respostas.ErroAPI{Erro: erro.Error()})
+		return
+	}
+
+	url := fmt.Sprintf("%s/publicacoes/%d", config.API_URL, publicacaoID)
+	response, erro := requisicoes.RequisicaoComAutenticacao(r, http.MethodDelete, url, nil)
+
+	if erro != nil {
+		respostas.JSON(w, http.StatusInternalServerError, respostas.ErroAPI{Erro: erro.Error()})
+		return
+	}
+
+	defer response.Body.Close()
+
+	if response.StatusCode >= 400 {
+		respostas.TratarErroAPI(w, response)
+		return
+	}
+
+	respostas.JSON(w, response.StatusCode, nil)
+}
