@@ -16,7 +16,7 @@
     {{$SeguidoPeloUsuarioLogado := false}}
     {{ range .Usuario.Seguidores }}
         {{ if (eq .ID $.UsuarioLogadoID )}}
-            {{$SeguidoPeloUsuarioLogado := true}}
+            {{$SeguidoPeloUsuarioLogado = true}}
         {{ end }}
     {{ end }}
 
@@ -66,6 +66,7 @@
     {{ template "scripts" }}
 
     <script src="/assets/js/publicacoes.js"></script>
+    <script src="/assets/js/usuarios.js"></script>
 </body>
 
 </html>
