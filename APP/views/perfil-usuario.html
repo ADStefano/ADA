@@ -27,8 +27,16 @@
                     <div class="card-body">
                         <h5 class="card-title"> Perfil do Usuário: {{.Usuario.Nome }} </h5>
                         <h6 class="card-subtitle mb-2 text-muted"> {{.Usuario.Nome }} - {{ .Usuario.Nick }} - Membro Desde: {{ .Usuario.CriadoEm.Format "02/01/2006" }}</h6>
-                        <p class="card-text"> Seguindo {{ len .Usuario.Seguindo }}</p>
-                        <p class="card-text"> Seguidores {{ len .Usuario.Seguidores }}</p>
+                        <p class="card-text"> 
+                            <a href="#" data-bs-toggle="modal" data-bs-target="#modal-seguindo">
+                                Seguindo: {{ len .Usuario.Seguindo }}
+                            </a>
+                        </p>
+                        <p class="card-text"> 
+                            <a href="#" data-bs-toggle="modal" data-bs-target="#modal-seguidores">
+                                Seguidores: {{ len .Usuario.Seguidores }}
+                            </a>
+                        </p>
                         <a href="#" class="card-link">
                             {{ if $SeguidoPeloUsuarioLogado }}
                                 <button id="parar-de-seguir" class="btn bnt-info" data-usuario-id="{{ .Usuario.ID }}">
@@ -62,6 +70,9 @@
         </div>
     </div>
 
+
+    {{ template "modal-seguidores" .Usuario }}
+    {{ template "modal-seguindo" .Usuario }}
     {{ template "footer" }}
     {{ template "scripts" }}
 
