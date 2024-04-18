@@ -1,5 +1,6 @@
 $('#seguir').on('click', seguirUsuario);
 $('#parar-de-seguir').on('click', pararDeSeguirUsuario);
+$('#editar-usuario').on('submit', editarUsuario);
 
 function seguirUsuario(){
 
@@ -33,3 +34,24 @@ function pararDeSeguirUsuario(){
     })
 
 };
+
+function editarUsuario(evento){
+    evento.preventDefault();
+
+    $.ajax({
+        url: "/editar-usuario",
+        method: "PUT",
+        data: {
+            "nome": $('#nome').val(),
+            "email": $('#email').val(),
+            "nick": $('#nick').val(),
+        }
+    }).done(function() {
+        Swal.fire("Sucesso!","Perfil editado com sucesso!", "success").then(function() {
+            window.location = "/perfil";
+        })
+    }).fail(function(){
+        Swal.fire("Ops...","Erro ao editar perfil!","error");
+    })
+
+}

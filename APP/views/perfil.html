@@ -31,13 +31,13 @@
                                 Seguidores: {{ len .Seguidores }}
                             </a>
                         </p>
-                        <a href="/editar-perfil" class="card-link" style="text-decoration: none;">
-                            <button id="editar-perfil" class="btn bnt-info" data-usuario-id="{{ .ID }}">
+                        <a href="/editar-usuario" class="card-link" style="text-decoration: none;">
+                            <button id="editar-usuario" data-usuario-id="{{ .ID }}" class="btn text-light" style="background-color: #3A015C;">
                                 Editar Perfil
                             </button>
                         </a>
                         <a href="/atualizar-senha" class="card-link">
-                            <button id="atualizar-senha" class="btn bnt-info" data-usuario-id="{{ .ID }}">
+                            <button id="atualizar-senha" data-usuario-id="{{ .ID }}" class="btn text-light" style="background-color: #3A015C;">
                                 Atualizar senha
                             </button>
                         </a>

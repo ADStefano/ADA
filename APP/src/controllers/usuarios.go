@@ -2,11 +2,13 @@ package controllers
 
 import (
 	"app/src/config"
+	"app/src/cookies"
 	"app/src/requisicoes"
 	"app/src/respostas"
 	"bytes"
 	"encoding/json"
 	"fmt"
+	"log"
 	"net/http"
 	"strconv"
 
@@ -104,4 +106,42 @@ func PararDeSeguirUsuario(w http.ResponseWriter, r *http.Request) {
 
 	respostas.JSON(w,response.StatusCode, nil)
 
+}
+
+// Edita o perfil do usuário
+func EditarPerfilDoUsuario(w http.ResponseWriter, r *http.Request) {
+
+	r.ParseForm()
+
+	usuario, erro := json.Marshal(map[string]string{
+		"nome": r.FormValue("nome"),
+		"email": r.FormValue("email"),
+		"nick": r.FormValue("nick"),
+	})
+
+	if erro != nil {
+		respostas.JSON(w, http.StatusBadRequest, respostas.ErroAPI{Erro: erro.Error()})
+		return
+	}
+
+	cookie, _ := cookies.Ler(r)
+	usuarioID, _ := strconv.ParseUint(cookie["id"], 10, 64)
+
+	log.Printf("Atualizando perfil do usuário: %d", usuarioID)
+
+	url := fmt.Sprintf("%s/usuarios/%d", config.API_URL, usuarioID)
+	response, erro := requisicoes.RequisicaoComAutenticacao(r, http.MethodPut, url, bytes.NewBuffer(usuario))
+	if erro != nil {
+		respostas.JSON(w, http.StatusInternalServerError, respostas.ErroAPI{Erro: erro.Error()})
+		return
+	}
+
+	defer response.Body.Close()
+
+	if response.StatusCode >= 400 {
+		respostas.TratarErroAPI(w, response)
+		return
+	}
+
+	respostas.JSON(w,response.StatusCode, nil)
 }
