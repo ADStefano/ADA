@@ -81,7 +81,11 @@ function editarPublicacao(evento){
 
     $.ajax({
         url: `/publicacoes/${publicacaoID}`,
-        method: "PUT"
+        method: "PUT",
+        data: {
+            "titulo": $('#titulo').val(),
+            "conteudo": $('#conteudo').val(),
+        }
     }).done(function() {
         Swal.fire("Sucesso!","Publicação editada com sucesso!", "success").then(function() {
             window.location = "/home";

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="/assets/images/favicon.ico">
+    <link rel="stylesheet" href="/assets/css/bootstrap.css">
+    <link rel="stylesheet" href="/assets/fontawesome/css/all.min.css">
+    <title> Meu Perfil </title>
+</head>
+
+<body>
+
+    {{ template "cabecalho" }}
+
+    <div class="container-fluid">
+        <div class="row mt-4">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title"> Meu Perfil </h5>
+                        <h6 class="card-subtitle mb-2 text-muted"> {{.Nome }} - {{ .Nick }} - Membro Desde: {{ .CriadoEm.Format "02/01/2006" }}</h6>
+                        <p class="card-text"> 
+                            <a href="#" data-bs-toggle="modal" data-bs-target="#modal-seguindo">
+                                Seguindo: {{ len .Seguindo }}
+                            </a>
+                        </p>
+                        <p class="card-text"> 
+                            <a href="#" data-bs-toggle="modal" data-bs-target="#modal-seguidores">
+                                Seguidores: {{ len .Seguidores }}
+                            </a>
+                        </p>
+                        <a href="/editar-perfil" class="card-link" style="text-decoration: none;">
+                            <button id="editar-perfil" class="btn bnt-info" data-usuario-id="{{ .ID }}">
+                                Editar Perfil
+                            </button>
+                        </a>
+                        <a href="/atualizar-senha" class="card-link">
+                            <button id="atualizar-senha" class="btn bnt-info" data-usuario-id="{{ .ID }}">
+                                Atualizar senha
+                            </button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-4">
+            <div class="classcol-12">
+                <div class="class card">
+                    <div class="class card-body">
+                        <h5 class="class card-title"> Publicações </h5>
+                        <p class="class card-text">
+                            {{ range .Publicacoes }}
+                                {{ template "publicacao-com-permissao-perfil" . }}
+                            {{ else }}
+                                Você ainda não fez nenhuma publicação
+                            {{end}}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    {{ template "modal-seguidores" . }}
+    {{ template "modal-seguindo" . }}
+    {{ template "footer" }}
+    {{ template "scripts" }}
+
+    <script src="/assets/js/publicacoes.js"></script>
+    <script src="/assets/js/usuarios.js"></script>
+</body>
+
+</html>

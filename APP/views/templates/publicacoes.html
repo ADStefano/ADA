@@ -19,7 +19,16 @@
     <h6 align="right"> {{ .CriadaEm.Format "02/01/2006" }}</h6>
     <h1 class="display-6">{{ .Titulo }}</h1>
     <p class="lead">{{ .Conteudo }}</p>
-    <a href="#"> {{ .AutorNick }} </a>
+    <a href="/usuarios/{{ .AutorID }}"> {{ .AutorNick }} </a>
+    <br>
+    <br>
+{{ end }}
+
+{{ define "cabecalho-publicacao-perfil" }}
+    <h6 align="right"> {{ .CriadaEm.Format "02/01/2006" }}</h6>
+    <h1 class="display-6">{{ .Titulo }}</h1>
+    <p class="lead">{{ .Conteudo }}</p>
+    <p> {{ .AutorNick }} </p>
     <br>
     <br>
 {{ end }}
@@ -27,6 +36,17 @@
 {{ define "publicacao-com-permissao" }}
     <div class="jumbotron" style="padding: 20px; border: 1px solid #ddd;" data-publicacao-id="{{ .ID }}">
         {{ template "cabecalho-publicacao" .}}
+        <p style="text-align: right;">
+            {{ template "curtidas" . }}
+            {{ template "editar" . }}
+            {{ template "apagar" . }}
+        </p>
+    </div>
+{{ end }}
+
+{{ define "publicacao-com-permissao-perfil" }}
+    <div class="jumbotron" style="padding: 20px; border: 1px solid #ddd;" data-publicacao-id="{{ .ID }}">
+        {{ template "cabecalho-publicacao-perfil" .}}
         <p style="text-align: right;">
             {{ template "curtidas" . }}
             {{ template "editar" . }}

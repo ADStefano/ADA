@@ -7,6 +7,7 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
+	"log"
 	"net/http"
 	"strconv"
 
@@ -109,13 +110,19 @@ func EditarPublicacao(w http.ResponseWriter, r *http.Request){
 
 	parametros := mux.Vars(r)
 
+	log.Printf("Parâmetros: %s", parametros)
+
 	publicacaoID, erro := strconv.ParseUint(parametros["publicacaoID"], 10, 64)
 	if erro != nil {
 		respostas.JSON(w, http.StatusBadRequest, respostas.ErroAPI{Erro: erro.Error()})
 		return
 	}
 
+	log.Printf("Id da publicação a ser editada: %d", publicacaoID)
+
 	r.ParseForm()
+
+	log.Printf("Titulo: %s\n Conteudo: %s", r.FormValue("titulo"), r.FormValue("conteudo"))
 
 	publicacao, erro := json.Marshal(map[string]string{
 		"titulo":   r.FormValue("titulo"),
