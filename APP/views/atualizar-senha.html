@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="/assets/images/favicon.ico">
+    <link rel="stylesheet" href="/assets/css/bootstrap.css">
+    <link rel="stylesheet" href="/asse  ts/fontawesome/css/all.min.css">
+    <title> Atualizar senha </title>
+</head>
+
+<body>
+
+    {{ template "cabecalho" }}
+
+    <div class="container-fluid">
+        <div class="class row mt-4">
+            <div class="col-12">
+                <h3> Atualizar senha </h3>
+                <form id="atualizar-senha" class="w-25">
+                    <div class="class form-group">
+                        <label for="senha-atual">Senha atual</label>
+                        <input type="password" class="form-control" placeholder="Insira a sua senha atual" required="required" id="senha-atual"
+                        name="senha-atual">
+                    </div>
+                    <div class="class form-group">
+                        <label for="nova-senha">Nova senha</label>
+                        <input type="password" class="form-control" placeholder="Insira a sua nova senha" required="required" id="nova-senha"
+                        name="nova-senha">
+                    </div>
+                    <div class="class form-group">
+                        <label for="confirmar-senha">Confirmar senha</label>
+                        <input type="password" class="form-control" placeholder="Confirme a nova senha" required="required" id="confirmar-senha" 
+                        name="confirmar-senha">
+                    </div>
+                    </br>
+                    <button class="btn text-light" style="background-color: #3A015C;" type="submit"> Atualizar Dados </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+<footer style="position: absolute; bottom: 0;">
+    {{ template "footer" }}
+    {{ template "scripts" }}
+    <script src="/assets/js/usuarios.js"></script>
+</footer>
+
+</html>

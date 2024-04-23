@@ -9,13 +9,14 @@ import (
 
 // Faz uma requisição passando o cookie no header como autenticação
 func RequisicaoComAutenticacao(r *http.Request, metodo, url string, dados io.Reader) (*http.Response, error) {
+
 	request, erro := http.NewRequest(metodo, url, dados)
-	if erro != nil{
+	if erro != nil {
 		return nil, erro
 	}
 
 	cookie, erro := cookies.Ler(r)
-	if erro != nil{
+	if erro != nil {
 		return nil, erro
 	}
 
@@ -25,7 +26,7 @@ func RequisicaoComAutenticacao(r *http.Request, metodo, url string, dados io.Rea
 
 	client := http.Client{}
 	response, erro := client.Do(request)
-	if erro != nil{
+	if erro != nil {
 		return nil, erro
 	}
 

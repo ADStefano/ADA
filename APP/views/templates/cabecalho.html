@@ -11,10 +11,15 @@
             <a class="nav-link active" aria-current="page" href="/perfil" style="color: white">Perfil</a>
           </li>
         </ul>
-        <form class="d-flex" action="/buscar-usuarios" method="get">
+        <form class="d-flex" action="/buscar-usuarios" method="get" style="margin-left: 100px; margin-right: 825px;">
           <input class="form-control mr-sm-2" type="search" placeholder="Buscar Usuário" id="usuario" name="usuario" required="required" style="background-color: white; opacity: 1;">
         </form>
       </div>
+      <span class="navbar-text p-0">
+        <a href="/logout">
+          <i class="fas fa-power-off" style="color: white; margin-right: 10px;"></i>
+        </a>
+      </span>
     </div>
   </nav>
 {{ end }}

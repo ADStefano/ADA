@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="/assets/images/favicon.ico">
+    <link rel="stylesheet" href="/assets/css/bootstrap.css">
+    <link rel="stylesheet" href="/asse  ts/fontawesome/css/all.min.css">
+    <title> Editar Perfil </title>
+</head>
+
+<body>
+
+    {{ template "cabecalho" }}
+
+    <div class="container-fluid">
+        <div class="class row mt-4">
+            <div class="col-12">
+                <h3> Editar dados </h3>
+                <form id="editar-usuario">
+                    <div class="class form-group">
+                        <label for="nome">Nome</label>
+                        <input type="text" class="form-control" placeholder="Insira o seu nome" value="{{ .Nome }}" required="required" id="nome"
+                        name="nome">
+                    </div>
+                    <div class="class form-group">
+                        <label for="email">Email</label>
+                        <input type="text" class="form-control" placeholder="Insira o seu email" value="{{ .Email }}" required="required" id="email"
+                        name="email">
+                    </div>
+                    <div class="class form-group">
+                        <label for="nick">Nick</label>
+                        <input type="text" class="form-control" placeholder="Insira o seu nick" value="{{ .Nick }}" required="required" id="nick" 
+                        name="nick">
+                    </div>
+                    </br>
+                    <button class="btn text-light" style="background-color: #3A015C;" type="submit"> Atualizar Dados </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
+
+<footer style="position: absolute; bottom: 0;">
+    {{ template "footer" }}
+    {{ template "scripts" }}
+    <script src="/assets/js/usuarios.js"></script>
+</footer>

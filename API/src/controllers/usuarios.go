@@ -11,6 +11,7 @@ import (
 	"errors"
 	"fmt"
 	"io"
+	"log"
 	"net/http"
 	"strconv"
 	"strings"
@@ -222,6 +223,7 @@ func SeguirUsuario(w http.ResponseWriter, r *http.Request) {
 	}
 
 	if usuarioID == seguidorID {
+		log.Println("não é possível seguir você mesmo")
 		respostas.Erro(w, http.StatusForbidden, errors.New("não é possível seguir você mesmo"))
 		return
 	}

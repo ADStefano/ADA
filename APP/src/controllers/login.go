@@ -8,6 +8,7 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
+	"log"
 	"net/http"
 )
 
@@ -25,6 +26,8 @@ func FazerLogin(w http.ResponseWriter, r *http.Request) {
 		respostas.JSON(w, http.StatusBadRequest, respostas.ErroAPI{Erro: erro.Error()})
 		return
 	}
+
+	log.Printf("Fazendo login do usuário: %s", r.FormValue("email"))
 
 	url := fmt.Sprintf("%s/login", config.API_URL)
 	response, erro := http.Post(url, "application/json", bytes.NewBuffer(usuario))

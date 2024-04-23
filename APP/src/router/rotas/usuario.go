@@ -7,15 +7,75 @@ import (
 
 var rotasUsuarios = []Rota{
 	{
-		URI: "/criar-usuario",
-		Metodo: http.MethodGet,
-		Funcao: controllers.CarregarCadastroUsuario,
+		URI:                "/criar-usuario",
+		Metodo:             http.MethodGet,
+		Funcao:             controllers.CarregarCadastroUsuario,
 		RequerAutenticacao: false,
 	},
 	{
-		URI: "/usuarios",
-		Metodo: http.MethodPost,
-		Funcao: controllers.CadastrarUsuario,
+		URI:                "/usuarios",
+		Metodo:             http.MethodPost,
+		Funcao:             controllers.CadastrarUsuario,
 		RequerAutenticacao: false,
+	},
+	{
+		URI:                "/buscar-usuarios",
+		Metodo:             http.MethodGet,
+		Funcao:             controllers.CarregarPaginaDeUsuarios,
+		RequerAutenticacao: true,
+	},
+	{
+		URI:                "/usuarios/{usuarioID}",
+		Metodo:             http.MethodGet,
+		Funcao:             controllers.CarregarPerfilDoUsuario,
+		RequerAutenticacao: true,
+	},
+	{
+		URI:                "/usuarios/{usuarioID}/seguir",
+		Metodo:             http.MethodPost,
+		Funcao:             controllers.SeguirUsuario,
+		RequerAutenticacao: true,
+	},
+	{
+		URI:                "/usuarios/{usuarioID}/parar-de-seguir",
+		Metodo:             http.MethodPost,
+		Funcao:             controllers.PararDeSeguirUsuario,
+		RequerAutenticacao: true,
+	},
+	{
+		URI:                "/perfil",
+		Metodo:             http.MethodGet,
+		Funcao:             controllers.CarregarPerfilDoUsuarioLogado,
+		RequerAutenticacao: true,
+	},
+	{
+		URI:                "/editar-usuario",
+		Metodo:             http.MethodGet,
+		Funcao:             controllers.CarregarPaginaEdicaoPerfilDoUsuario,
+		RequerAutenticacao: true,
+	},
+	{
+		URI:                "/editar-usuario",
+		Metodo:             http.MethodPut,
+		Funcao:             controllers.EditarPerfilDoUsuario,
+		RequerAutenticacao: true,
+	},
+	{
+		URI:                "/atualizar-senha",
+		Metodo:             http.MethodGet,
+		Funcao:             controllers.CarregarPaginaAtualizacaoSenha,
+		RequerAutenticacao: true,
+	},
+	{
+		URI:                "/atualizar-senha",
+		Metodo:             http.MethodPost,
+		Funcao:             controllers.AtualizarSenha,
+		RequerAutenticacao: true,
+	},
+	{
+		URI:                "/deletar-usuario",
+		Metodo:             http.MethodDelete,
+		Funcao:             controllers.DeletarUsuario,
+		RequerAutenticacao: true,
 	},
 }
