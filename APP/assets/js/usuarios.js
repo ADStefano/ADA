@@ -1,6 +1,7 @@
 $('#seguir').on('click', seguirUsuario);
 $('#parar-de-seguir').on('click', pararDeSeguirUsuario);
 $('#editar-usuario').on('submit', editarUsuario);
+$('#atualizar-senha').on('submit', atualizarSenha);
 
 function seguirUsuario(){
 
@@ -52,6 +53,31 @@ function editarUsuario(evento){
         })
     }).fail(function(){
         Swal.fire("Ops...","Erro ao editar perfil!","error");
+    })
+
+}
+
+function atualizarSenha(evento){
+    evento.preventDefault();
+
+    if ($("#nova-senha").val() != $("#confirmar-senha").val()){
+        Swal.fire("Ops...","As senhas não coincidem!","warning");
+        return;
+    }
+
+    $.ajax({
+        url: "/atualizar-senha",
+        method: "POST",
+        data: {
+            "atual": $("#senha-atual").val(),
+            "nova": $("#nova-senha").val()
+        }
+    }).done(function() {
+        Swal.fire("Sucesso!","Senha alterada com sucesso!", "success").then(function() {
+            window.location = "/perfil";
+        })
+    }).fail(function(){
+        Swal.fire("Ops...","Erro ao atualizar senha!","error");
     })
 
 }

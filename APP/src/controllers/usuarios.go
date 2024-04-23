@@ -15,7 +15,7 @@ import (
 	"github.com/gorilla/mux"
 )
 
-// Cadastra um usuário no banco de dados
+// Chama a API para cadastrar um usuário no banco de dados
 func CadastrarUsuario(w http.ResponseWriter, r *http.Request) {
 
 	r.ParseForm()
@@ -108,7 +108,7 @@ func PararDeSeguirUsuario(w http.ResponseWriter, r *http.Request) {
 
 }
 
-// Edita o perfil do usuário
+// Chama a API para editar o perfil do usuário
 func EditarPerfilDoUsuario(w http.ResponseWriter, r *http.Request) {
 
 	r.ParseForm()
@@ -135,6 +135,46 @@ func EditarPerfilDoUsuario(w http.ResponseWriter, r *http.Request) {
 		respostas.JSON(w, http.StatusInternalServerError, respostas.ErroAPI{Erro: erro.Error()})
 		return
 	}
+
+	defer response.Body.Close()
+
+	if response.StatusCode >= 400 {
+		respostas.TratarErroAPI(w, response)
+		return
+	}
+
+	respostas.JSON(w,response.StatusCode, nil)
+}
+
+// Chama a API para atualizar a senha do usuário
+func AtualizarSenha(w http.ResponseWriter, r *http.Request) {
+
+	r.ParseForm()
+
+	senhas, erro := json.Marshal(map[string]string{
+		"atual": r.FormValue("atual"),
+		"nova": r.FormValue("nova"),
+	})
+
+	if erro != nil {
+		respostas.JSON(w, http.StatusBadRequest, respostas.ErroAPI{Erro: erro.Error()})
+		return
+	}
+
+
+	cookie, _ := cookies.Ler(r)
+	usuarioID, _ := strconv.ParseUint(cookie["id"], 10, 64)
+
+	log.Printf("Atualizando senha do usuário: %d", usuarioID)
+
+	url := fmt.Sprintf("%s/usuarios/%d/atualizar-senha", config.API_URL, usuarioID)
+	response, erro := requisicoes.RequisicaoComAutenticacao(r, http.MethodPost, url, bytes.NewBuffer(senhas))
+	if erro != nil {
+		respostas.JSON(w, http.StatusInternalServerError, respostas.ErroAPI{Erro: erro.Error()})
+		return
+	}
+
+	log.Printf("Status code: %d", response.StatusCode)
 
 	defer response.Body.Close()
 
