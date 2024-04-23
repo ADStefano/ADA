@@ -2,6 +2,7 @@ $('#seguir').on('click', seguirUsuario);
 $('#parar-de-seguir').on('click', pararDeSeguirUsuario);
 $('#editar-usuario').on('submit', editarUsuario);
 $('#atualizar-senha').on('submit', atualizarSenha);
+$('#deletar-usuario').on('click', deletarUsuario);
 
 function seguirUsuario(){
 
@@ -80,4 +81,28 @@ function atualizarSenha(evento){
         Swal.fire("Ops...","Erro ao atualizar senha!","error");
     })
 
+}
+
+function deletarUsuario(){
+    Swal.fire({
+        title: "Atenção!",
+        text: "Tem certeza que deseja deletar a sua conta? Essa é uma ação irreversível",
+        showCancelButton: true,
+        cancelButtonText: "Cancelar",
+        icon: "warning"
+    }).then(function(confirmacao){
+        if(confirmacao.value){
+            $.ajax({
+                url: "/deletar-usuario",
+                method: "DELETE"
+            }).done(function(){
+                Swal.fire("Sua conta foi deletada permanentemente :c")
+                .then(function(){
+                    window.location = "/logout";
+                })
+            }).fail(function(){
+                Swal.fire("Ops...", "Erro ao deletar usuário", "error")
+            })
+        }
+    })
 }
