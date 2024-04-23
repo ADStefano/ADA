@@ -23,7 +23,7 @@ func Config(){
 
 	var erro error
 
-	if erro = godotenv.Load("/home/angelo/Documentos/Programação/Enviroments/ada.env"); erro != nil{
+	if erro = godotenv.Load(); erro != nil{
 		log.Fatal(erro) 	
 	}
 
