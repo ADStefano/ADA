@@ -11,4 +11,3 @@ Rede social criada com o propósito de aprender Go, com base nas aulas do profes
 * HTML
 * MySQL
 
-:construction: Projeto em andamento :construction:
